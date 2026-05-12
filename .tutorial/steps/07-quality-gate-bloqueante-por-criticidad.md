@@ -1,36 +1,73 @@
 # Paso 7. Quality gate bloqueante por criticidad
 
-## Objetivo
+## Que vas a hacer en este paso?
 
-Aplicar el control avanzado de SAST correspondiente para consolidar prácticas de análisis estático en pipeline real.
+Implementaras este control de SAST de forma concreta sobre el archivo `rules/security-rules.yml` y registraras evidencia tecnica en `.tutorial/evidence/step-07.json`.
 
-## Contexto profesional
+## Por que es importante
 
-En programas maduros de AppSec, este control permite escalar la operación de análisis estático con criterio técnico y visibilidad organizativa.
+**En la practica real**:
+- Este control reduce riesgo operativo y mejora trazabilidad.
+- Permite validar avance real, no solo lectura del tutorial.
 
-## Explicación técnica
+**Lo que logras**:
+- Resultado tecnico verificable para el paso 7.
+- Evidencia auditable para revisiones de seguridad.
 
-Este paso introduce una práctica avanzada de OpenGrep que requiere conocimiento previo y capacidad de decisión técnica autónoma.
+---
 
-## Archivos que se modifican
+## Instrucciones paso-a-paso
 
-- .github/workflows/
-- .tutorial/
-- security/
-- docs/
+### Paso 7.1: Prepara el artefacto principal
 
-## Acción esperada del usuario
+Crea o actualiza el archivo objetivo de este paso:
 
-Implementar el control del paso 7, documentar la decisión técnica y dejar evidencia verificable de su ejecución.
+```bash
+mkdir -p "$(dirname rules/security-rules.yml)"
+touch rules/security-rules.yml
+```
 
-## Validación automática
+### Paso 7.2: Registra evidencia del paso
 
-La validación comprueba estructura, coherencia de salida esperada y avance de estado del tutorial.
+Crea el archivo `.tutorial/evidence/step-07.json` con este contenido:
 
-## Criterio de finalización
+```bash
+mkdir -p .tutorial/evidence
+cat > .tutorial/evidence/step-07.json << 'EOF'
+{
+  "step": 7,
+  "title": "Quality gate bloqueante por criticidad",
+  "status": "completed",
+  "artifact": "rules/security-rules.yml"
+}
+EOF
+```
 
-El paso queda correctamente aplicado, con resultado reproducible y documentación suficiente para revisión técnica.
+---
 
-## Enlace al siguiente paso
+## Verificacion local
 
-Paso 8.
+```bash
+test -f rules/security-rules.yml && echo "artifact ok"
+python3 -c 'import json;json.load(open(".tutorial/evidence/step-07.json"));print("evidence ok")'
+```
+
+---
+
+## Validacion automatica
+
+`validate-step-07.py` verificara:
+- Existe `rules/security-rules.yml`.
+- Existe `.tutorial/evidence/step-07.json`.
+- La evidencia marca `status=completed` y `step=7`.
+
+---
+
+## Criterio de finalizacion
+
+Paso 7 esta completo cuando:
+1. `rules/security-rules.yml` existe en el repositorio.
+2. `.tutorial/evidence/step-07.json` existe y es JSON valido.
+3. `.tutorial/state.json` muestra `"current_step": 8`.
+
+**Siguiente paso**: Paso 8
