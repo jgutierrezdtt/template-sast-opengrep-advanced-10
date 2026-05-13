@@ -2,11 +2,11 @@
 
 ## Objetivo de aprendizaje
 
-Este paso introduce un control de SAST y debe dejar un cambio comprensible en .github/workflows/sast.yml.
+Este paso introduce un quality gate bloqueante por criticidad y debe dejar un cambio comprensible en `.github/workflows/sast.yml`.
 
 ## Que vas a cambiar y por que
 
-Actualiza .github/workflows/sast.yml para que el control de "quality gate bloqueante por criticidad" quede explícito y revisable.
+En este paso vas a reforzar `.github/workflows/sast.yml` para que el análisis estático pueda actuar como puerta de calidad. La idea no es bloquear por todo, sino establecer una base sobre la que después puedas aplicar criterio según severidad o tipo de hallazgo. Para eso, primero debe quedar clara la ejecución del workflow y el conjunto de reglas aplicado.
 
 ## Archivo y seccion que debes modificar
 
@@ -29,7 +29,8 @@ rules/security-rules.yml
 ## Como adaptarlo correctamente
 
 - Mantén el cambio pequeño y centrado en una sola idea por paso.
-- Usa nombres claros para secciones, reglas o jobs.
+- Usa `Run OpenGrep` como paso visible del gate para que se entienda qué evaluación decide el resultado.
+- Asegúrate de que `rules/security-rules.yml` aparezca como fuente de criterio y no como detalle escondido.
 - Evita añadir configuración que no esté relacionada con el objetivo del paso.
 
 ## Que deberia verse al terminar
@@ -37,6 +38,7 @@ rules/security-rules.yml
 - La intención del cambio se entiende leyendo el archivo.
 - El archivo muestra el control sin depender de comentarios ambiguos.
 - Los marcadores esperados del paso aparecen de forma natural en la configuración.
+- Se entiende que el bloqueo futuro descansa sobre un flujo de análisis claramente identificable.
 
 ## Que valida el workflow automaticamente
 
