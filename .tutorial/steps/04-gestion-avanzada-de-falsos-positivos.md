@@ -2,11 +2,11 @@
 
 ## Objetivo de aprendizaje
 
-Este paso introduce un control de SAST y debe dejar un cambio comprensible en rules/security-rules.yml.
+Este paso introduce un criterio avanzado para tratar falsos positivos y debe dejar un cambio comprensible en `rules/security-rules.yml`.
 
 ## Que vas a cambiar y por que
 
-Actualiza rules/security-rules.yml para que el control de "gestion avanzada de falsos positivos" quede explícito y revisable.
+En este paso vas a usar `rules/security-rules.yml` para mostrar que gestionar falsos positivos no significa borrar reglas a la primera señal de ruido. Una parte importante del trabajo avanzado consiste en ajustar severidad y criterio para mantener visibilidad sin bloquear innecesariamente al equipo.
 
 ## Archivo y seccion que debes modificar
 
@@ -20,14 +20,15 @@ Este bloque no es para pegar a ciegas: úsalo como punto de partida y ajústalo 
 
 ```yaml
 rules:
-id: demo-rule
-severity: WARNING
+  - id: demo-rule
+    severity: WARNING
 ```
 
 ## Como adaptarlo correctamente
 
 - Mantén el cambio pequeño y centrado en una sola idea por paso.
-- Usa nombres claros para secciones, reglas o jobs.
+- Usa `WARNING` cuando la señal siga siendo útil pero no deba romper el flujo por sí sola.
+- No conviertas todos los casos dudosos en `WARNING`; el objetivo es afinar la señal, no diluirla.
 - Evita añadir configuración que no esté relacionada con el objetivo del paso.
 
 ## Que deberia verse al terminar
@@ -35,6 +36,7 @@ severity: WARNING
 - La intención del cambio se entiende leyendo el archivo.
 - El archivo muestra el control sin depender de comentarios ambiguos.
 - Los marcadores esperados del paso aparecen de forma natural en la configuración.
+- Se entiende que la severidad también es una herramienta de gestión del ruido.
 
 ## Que valida el workflow automaticamente
 
