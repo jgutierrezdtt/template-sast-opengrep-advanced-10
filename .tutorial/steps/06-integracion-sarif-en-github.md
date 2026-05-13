@@ -2,11 +2,11 @@
 
 ## Objetivo de aprendizaje
 
-Este paso introduce un control de SAST y debe dejar un cambio comprensible en .github/workflows/sast.yml.
+Este paso introduce la integración SARIF y debe dejar un cambio comprensible en `.github/workflows/sast.yml`.
 
 ## Que vas a cambiar y por que
 
-Actualiza .github/workflows/sast.yml para que el control de "integracion sarif en github" quede explícito y revisable.
+En este paso vas a reforzar `.github/workflows/sast.yml` para que el pipeline no se limite a ejecutar OpenGrep, sino que produzca resultados en un formato que GitHub pueda consumir mejor. SARIF importa porque convierte el análisis estático en hallazgos explotables dentro del ecosistema de revisión, seguridad y seguimiento.
 
 ## Archivo y seccion que debes modificar
 
@@ -27,7 +27,8 @@ results.sarif
 ## Como adaptarlo correctamente
 
 - Mantén el cambio pequeño y centrado en una sola idea por paso.
-- Usa nombres claros para secciones, reglas o jobs.
+- Usa `Export SARIF` como paso legible dentro del workflow y no como comando opaco.
+- Haz visible `results.sarif` para que se entienda qué artefacto sale del análisis.
 - Evita añadir configuración que no esté relacionada con el objetivo del paso.
 
 ## Que deberia verse al terminar
@@ -35,6 +36,7 @@ results.sarif
 - La intención del cambio se entiende leyendo el archivo.
 - El archivo muestra el control sin depender de comentarios ambiguos.
 - Los marcadores esperados del paso aparecen de forma natural en la configuración.
+- Se entiende que el pipeline ya prepara resultados reutilizables por GitHub y no solo texto en consola.
 
 ## Que valida el workflow automaticamente
 
