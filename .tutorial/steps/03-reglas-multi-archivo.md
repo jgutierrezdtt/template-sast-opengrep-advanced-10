@@ -2,11 +2,11 @@
 
 ## Objetivo de aprendizaje
 
-Este paso introduce un control de SAST y debe dejar un cambio comprensible en rules/security-rules.yml.
+Este paso introduce la idea de reglas multi archivo y debe dejar un cambio comprensible en `rules/security-rules.yml`.
 
 ## Que vas a cambiar y por que
 
-Actualiza rules/security-rules.yml para que el control de "reglas multi archivo" quede explícito y revisable.
+En este paso sigues trabajando sobre `rules/security-rules.yml`, pero ahora con una mirada más amplia: muchos problemas reales no se entienden aislando una línea, sino enlazando cómo un dato nace en un archivo y termina ejecutándose en otro. Aunque el validador siga usando la misma regla base, el objetivo didáctico es que leas `eval($X)` como un sink útil dentro de una historia distribuida entre varios ficheros.
 
 ## Archivo y seccion que debes modificar
 
@@ -20,16 +20,17 @@ Este bloque no es para pegar a ciegas: úsalo como punto de partida y ajústalo 
 
 ```yaml
 rules:
-id: insecure-eval
-message:
-severity: ERROR
-pattern: eval($X)
+  - id: insecure-eval
+    message: Detecta sink eval que puede recibir datos desde otros archivos
+    severity: ERROR
+    pattern: eval($X)
 ```
 
 ## Como adaptarlo correctamente
 
 - Mantén el cambio pequeño y centrado en una sola idea por paso.
-- Usa nombres claros para secciones, reglas o jobs.
+- Redacta `message` pensando en un caso donde la fuente y el sink no estén juntos.
+- Usa esta regla como base conceptual para evolucionar después hacia contexto interprocedimental o entre módulos.
 - Evita añadir configuración que no esté relacionada con el objetivo del paso.
 
 ## Que deberia verse al terminar
@@ -37,6 +38,7 @@ pattern: eval($X)
 - La intención del cambio se entiende leyendo el archivo.
 - El archivo muestra el control sin depender de comentarios ambiguos.
 - Los marcadores esperados del paso aparecen de forma natural en la configuración.
+- La regla ya sugiere que el análisis puede cruzar límites de archivo y no solo coincidencias locales.
 
 ## Que valida el workflow automaticamente
 
